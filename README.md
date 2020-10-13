@@ -34,7 +34,7 @@ In the JavaExample class you should change the following lines:
 
 - replace [evApiKey] with your API key. Don't add any extra spaces or punctuation
 - replace [evAccessToken] with your access token.
-- replace [accountnme] with the name of your ExaVault account
+- replace [accountName] with the name of your ExaVault account
 
 And save the class.
 
