@@ -19,8 +19,8 @@ Import JavaExample.zip to your IDE. For Eclipse File -> Import -> General -> Pro
 
 Get Java SDK [on Github](https://github.com/ExaVault/evapi-java). And after that import same jar's from the SKD target and lib folders.
 
-target/swagger-java-client-1.0.0.jar
-target/lib/*.jar
+- target/swagger-java-client-1.0.0.jar
+- target/lib/*.jar
 
 **Step 3 - Get your API Credentials** 
 
