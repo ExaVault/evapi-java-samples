@@ -19,8 +19,8 @@ Import JavaExample.zip to your IDE. For Eclipse File -> Import -> General -> Pro
 
 Get Java SDK [on Github](https://github.com/ExaVault/evapi-java). And after that import same jar's from the SKD target and lib folders.
 
-- target/swagger-java-client-1.0.0.jar
-- target/lib/*.jar
+* `target/swagger-java-client-1.0.0.jar`
+* `target/lib/*.jar`
 
 **Step 3 - Get your API Credentials** 
 
@@ -87,7 +87,7 @@ If you encounter any other issues running this sample code, you can contact ExaV
 
 When you're ready to write your own code, you can use our sample code as examples. You'll need to:
 
-1. Install our code library using this [Instructions](https://github.com/ExaVault/evapi-java)
+1. Install our code library using this [Instructions](https://github.com/ExaVault/evapi-java#compiling-and-installing-the-code-library)
 1. Set variables within your classes for your API key and access token or you can use dotenv libraries for java to handle it in one place.
 1. Whenever you instantiate an Api object (ResourcesApi, UsersApi, etc.), override the configuration to point the code at the correct API URL:
 ```java
