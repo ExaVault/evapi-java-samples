@@ -63,8 +63,8 @@ CreateUser                    | Add a new user with a home directory <br/>_\*add
 CompressFiles                 | Compress several files into a zip file <br/>_\*adds files and folders to your account_ | ResourcesApi                   |
 DownloadFiles                 | Search for files matching a certain extension, then download them.                     | ResourcesApi                   |
 GetActivity                   | List usernames who had a failed login in the last 24 hours                             | ActivityApi                    |
-GetUsers                      | Generate a report of users in your account                                             | UsersApi                       |
-CreateShare                   | Create a new shared folder with a password<br />_\*adds a folder to your account_      | ResourcesApi, SharesApi        |
+GetUsers                      | Print a list of users in your account                                             | UsersApi                       |
+CreateShare                   | Create a new shared folder <br />_\*adds a folder to your account_      | ResourcesApi, SharesApi        |
 UploadFiles                   | Upload a file to your account.<br />_\*uploads sample PDFS to your account_            | ResourcesApi                   |
 
 
