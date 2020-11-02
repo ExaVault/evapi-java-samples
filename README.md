@@ -1,16 +1,16 @@
-# ExaVault Java API Sample Project - v2.0
+# ExaVault Java API Sample Code - v2 API
 
 ## Introduction
-Welcome to the sample project for ExaVault's Java code library, which demonstrates how to use various aspects of our API with your ExaVault account. The Java code library is available [on Github](https://github.com/ExaVault/evapi-java). The library is generated from our API's [public swagger YAML file](https://www.exavault.com/api/docs/evapi_2.0_public.yaml)
+Welcome to the sample project for ExaVault's Java code library, which demonstrates how to use various aspects of our API with your ExaVault account. The Java code library is available [on Github](https://github.com/ExaVault/evapi-java). The library is generated from our API's [public swagger YAML file](https://www.exavault.com/api/docs/evapi_2.0_public.yaml).
 
 ## Requirements
 
 To run this project, you'll need Java 1.7+ (or greater) installed as well as any Java IDE (i.e. Eclipse or IntelliJ). 
 
-You'll also need an [ExaVault](https://www.exavault.com/) account as well as, and an [API key and Access Token](https://www.exavault.com/developer/api-docs/#section/Obtaining-Your-API-Key-and-Access-Token).
+You'll also need an [ExaVault](https://www.exavault.com/) account as well as and an [API key and Access Token](https://www.exavault.com/developer/api-docs/#section/Obtaining-Your-API-Key-and-Access-Token).
 
-Some sample scripts will assume your account contains the "Sample Files and Folders folder", which come pre-loaded with a new account. 
-You may need to make changes to ````DownloadFiles.java```` if those files are not present.
+Some sample scripts will assume your account contains the "Sample Files and Folders" folder, which come pre-loaded with a new account. 
+You may need to make changes to ````DownloadFiles.java```` if that folder is not present.
 
 ## Running Your First Sample
 
@@ -78,7 +78,7 @@ Primary Email Address: [your_email_id]
 There are several other sample classes that you can now run. You won't need to repeat the steps to set up your credentials  - the same information is used for all the sample classes.
 Some sample classes will make changes to your account (uploading, creating shares or notifications, etc). Those are marked with an asterisk below:
 
-Class                         | Purpose    \*=Makes changes to your account when run                                   | APIs Used                      |
+Class                         | Purpose                                                                                | APIs Used                      |
 ------------------------------|----------------------------------------------------------------------------------------|--------------------------------|
 GetAccount                    | List the amount of available space for your account                                    | AccountApi                     |
 AddNotification               | Add upload and download notifications<br/>_\*adds folders to your account_             | ResourcesApi, NotificationsApi |
