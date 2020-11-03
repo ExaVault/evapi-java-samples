@@ -1,7 +1,5 @@
-package com.evault.java.samples.apis.resource;
+package com.exavault.java.samples;
 
-import com.evault.java.samples.account.ApiClientHelper;
-import com.evault.java.samples.account.Credential;
 import com.exavault.client.ApiClient;
 import com.exavault.client.ApiException;
 import com.exavault.client.api.ResourcesApi;
@@ -9,11 +7,11 @@ import com.exavault.client.model.ResourceResponse;
 
 import java.io.File;
 
-import static com.evault.java.samples.apis.AddNotification.RESPONSE_CODE_201;
-import static com.evault.java.samples.apis.resource.util.Utils.BASE_PATH;
-import static com.evault.java.samples.apis.resource.util.Utils.getAllLocalFiles;
-import static com.evault.java.samples.apis.resource.util.Utils.getErrorStack;
-import static com.evault.java.samples.apis.resource.util.Utils.uploadFile;
+import static com.exavault.java.samples.AddNotification.RESPONSE_CODE_201;
+import static com.exavault.java.samples.Utils.BASE_PATH;
+import static com.exavault.java.samples.Utils.getAllLocalFiles;
+import static com.exavault.java.samples.Utils.getErrorStack;
+import static com.exavault.java.samples.Utils.uploadFile;
 
 /**
  * To use this sample, add your credentials to a file named {@code credentials.properties} which is located in {@code resources} folder at root level of your project.

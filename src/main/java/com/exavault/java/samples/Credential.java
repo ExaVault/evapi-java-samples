@@ -1,4 +1,4 @@
-package com.evault.java.samples.account;
+package com.exavault.java.samples;
 
 /**
  * Entity to keep variables to connect to {@link com.exavault.client.ApiClient}

@@ -1,7 +1,5 @@
-package com.evault.java.samples.apis;
+package com.exavault.java.samples;
 
-import com.evault.java.samples.account.ApiClientHelper;
-import com.evault.java.samples.account.Credential;
 import com.exavault.client.ApiClient;
 import com.exavault.client.ApiException;
 import com.exavault.client.api.AccountApi;
@@ -14,7 +12,7 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.List;
 
-import static com.evault.java.samples.apis.resource.util.Utils.getErrorStack;
+import static com.exavault.java.samples.Utils.getErrorStack;
 
 /**
  * To use this sample, add your credentials to a file named {@code credentials.properties} which is located in {@code resources} folder at root level of your project.

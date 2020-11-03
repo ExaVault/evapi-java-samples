@@ -1,4 +1,4 @@
-package com.evault.java.samples.account;
+package com.exavault.java.samples;
 
 
 import com.exavault.client.ApiClient;

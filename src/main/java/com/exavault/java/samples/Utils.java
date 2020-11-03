@@ -1,7 +1,5 @@
-package com.evault.java.samples.apis.resource.util;
+package com.exavault.java.samples;
 
-import com.evault.java.samples.account.Credential;
-import com.evault.java.samples.apis.resource.UploadFiles;
 import com.exavault.client.ApiException;
 import com.exavault.client.api.ResourcesApi;
 import com.exavault.client.model.ResourceResponse;
