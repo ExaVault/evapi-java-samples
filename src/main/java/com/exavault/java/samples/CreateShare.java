@@ -66,7 +66,7 @@ public class CreateShare {
 		resourcesApi = new ResourcesApi(apiClient);
 		sharesApi = new SharesApi(apiClient);
 		Random random = new Random();
-		int folderId = createAndGetFolderId(Math.abs(random.nextInt()));
+		long folderId = createAndGetFolderId(Math.abs(random.nextInt()));
 		if (folderId != -1) {
 			createShare(folderId);
 		} else {
@@ -79,17 +79,19 @@ public class CreateShare {
 	 * New Folder will have random name on each run of this program.
 	 * <p>
 	 * See <a href="https://www.exavault.com/developer/api-docs/v2#operation/addFolder">addFolder</a>
-	 * for the request body schema
+	 * for the request requestBody schema
+	 *
+	 * @return
 	 */
-	private static int createAndGetFolderId(int random) {
-		Body8 body = new Body8();
-		body.setPath(SAMPLE_SHARE + random);
-		int folderId = 0;
+	private static long createAndGetFolderId(int random) {
+		AddFolderRequestBody requestBody = new AddFolderRequestBody();
+		requestBody.setPath(SAMPLE_SHARE + random);
+		long folderId = 0;
 		try {
 			/* See <a href="https://www.exavault.com/developer/api-docs/v2#operation/addFolder">addFolder</a>
 			 *  for the details of this method
 			 */
-			ResourceResponse result = resourcesApi.addFolder(credential.getEvApiKey(), credential.getEvAccessToken(), body);
+			ResourceResponse result = resourcesApi.addFolder(credential.getEvApiKey(), credential.getEvAccessToken(), requestBody);
 			// Get id of the folder we've just created
 			Resource data = result.getData();
 			if (data != null) {
@@ -108,16 +110,16 @@ public class CreateShare {
 	 *
 	 * @param folderId the folder id to be used for shared resource
 	 */
-	public static void createShare(int folderId) {
+	public static void createShare(long folderId) {
 		/* See <a href="https://www.exavault.com/developer/api-docs/v2#operation/addShare">addShare</a>
-		 *  for the request body schema
+		 *  for the requestBody schema
 		 */
-		Body16 body16 = getBody16(folderId);
+		AddShareRequestBody requestBody = getRequestBody(folderId);
 		try {
 			/* See <a href="https://www.exavault.com/developer/api-docs/v2#operation/addShare">addShare</a>
 			 *  for the response schema
 			 */
-			ShareResponse result = sharesApi.addShare(credential.getEvApiKey(), credential.getEvAccessToken(), body16);
+			ShareResponse result = sharesApi.addShare(credential.getEvApiKey(), credential.getEvAccessToken(), requestBody);
 			//print out the response
 			printResponse(result);
 		} catch (ApiException e) {
@@ -155,15 +157,14 @@ public class CreateShare {
 	 * 	<li>We could also have used the full path to the folder</li>
 	 * </ul>
 	 */
-	private static Body16 getBody16(int folderId) {
-		Body16 body16 = new Body16();
+	private static AddShareRequestBody getRequestBody(long folderId) {
+		AddShareRequestBody requestBody = new AddShareRequestBody();
 		List<String> resources = Collections.singletonList("id:" + folderId);
-		List<String> accessMode = Collections.singletonList("download");
-		body16.setType(Body16.TypeEnum.SHARED_FOLDER);
-		body16.setName("notification-sample");
-		body16.setResources(resources);
-		body16.setPassword(PASSWORD);
-		body16.setAccessMode(accessMode);
-		return body16;
+		requestBody.setType(AddShareRequestBody.TypeEnum.SHARED_FOLDER);
+		requestBody.setName("notification-sample");
+		requestBody.setResources(resources);
+		requestBody.setPassword(PASSWORD);
+		requestBody.setAccessMode(Collections.singletonList(AddShareRequestBody.AccessModeEnum.DOWNLOAD));
+		return requestBody;
 	}
 }

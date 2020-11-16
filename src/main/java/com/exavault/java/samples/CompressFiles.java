@@ -3,7 +3,7 @@ package com.exavault.java.samples;
 import com.exavault.client.ApiClient;
 import com.exavault.client.ApiException;
 import com.exavault.client.api.ResourcesApi;
-import com.exavault.client.model.Body10;
+import com.exavault.client.model.CompressFilesRequestBody;
 import com.exavault.client.model.ResourceResponse;
 
 import java.io.File;
@@ -89,13 +89,13 @@ public class CompressFiles {
 	 * for the request body schema
 	 */
 	private static void compress() {
-		Body10 body = new Body10();
+		CompressFilesRequestBody requestBody = new CompressFilesRequestBody();
 		//base folder to take files from to compress, use the same folder where we uploaded files to in above call
 		List<String> resources = Collections.singletonList(BASE_PATH);
 		//set compressed archive name
-		body.setArchiveName(ARCHIVE_NAME);
-		body.setResources(resources);
-		body.setParentResource("/");
+		requestBody.setArchiveName(ARCHIVE_NAME);
+		requestBody.setResources(resources);
+		requestBody.setParentResource("/");
 		try {
 			/*
 			 * The compressFiles method of the ResourcesApi returns a ResourceResponse object
@@ -103,7 +103,7 @@ public class CompressFiles {
 			 * for the details of the response object
 			 */
 
-			ResourceResponse result = resourcesApi.compressFiles(credential.getEvApiKey(), credential.getEvAccessToken(), body);
+			ResourceResponse result = resourcesApi.compressFiles(credential.getEvApiKey(), credential.getEvAccessToken(), requestBody);
 			validateAndPrint(result);
 		} catch (ApiException e) {
 			System.err.println("Exception when calling ResourcesApi#compressFiles" + getErrorStack(e));
