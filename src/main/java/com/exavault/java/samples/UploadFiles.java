@@ -76,7 +76,7 @@ public class UploadFiles {
 	 */
 	private static void validateAndPrintResponse(ResourceResponse result, String fileName) {
 		if (result.getResponseStatus() == RESPONSE_CODE_201) {
-			System.out.println("Uploaded " + BASE_PATH + " " + fileName);
+			System.out.println("Uploaded " + BASE_PATH + "/" + fileName);
 		}
 	}
 }
