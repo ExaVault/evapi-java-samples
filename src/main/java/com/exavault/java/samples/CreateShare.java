@@ -164,7 +164,9 @@ public class CreateShare {
 		requestBody.setName("notification-sample");
 		requestBody.setResources(resources);
 		requestBody.setPassword(PASSWORD);
-		requestBody.setAccessMode(Collections.singletonList(AddShareRequestBody.AccessModeEnum.DOWNLOAD));
+		AccessMode accessMode = new AccessMode();
+		accessMode.setDownload(true);
+		requestBody.setAccessMode(accessMode);
 		return requestBody;
 	}
 }
