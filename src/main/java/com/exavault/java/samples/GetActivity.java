@@ -119,11 +119,11 @@ public class GetActivity {
 		}
 		//print the results on the console
 		System.out.println(failedLogins.size() + " Users with failed logins: ");
-		System.out.printf("%5s %20s", "Username", "Count");
+		System.out.printf("%5s %25s", "Username", "Count");
 		System.out.println("");
-		System.out.println("=============================");
+		System.out.println("==================================");
 		for (String userName : failedCounts.keySet()) {
-			System.out.format("%15s %10d", userName, failedCounts.get(userName));
+			System.out.format("%-20s %10d\n", userName, failedCounts.get(userName));
 		}
 	}
 }
