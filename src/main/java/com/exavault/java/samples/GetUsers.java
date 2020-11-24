@@ -131,7 +131,7 @@ public class GetUsers {
 					.append(COMMA)
 					.append(attributes.getNickname())
 					.append(COMMA)
-					.append(attributes.getHomeDir())
+					.append(attributes.getHomePath())
 					.append(COMMA)
 					.append(attributes.getRole().getValue())
 					.append(COMMA)

@@ -94,7 +94,7 @@ public class AddNotification {
 
 	//create folder and add notification to it
 	private static NotificationResponse createFolderAndAddNotification(boolean isUpload, int randomNumber) {
-		int folderId = createAndGetFolderId(randomNumber, isUpload);
+		long folderId = createAndGetFolderId(randomNumber, isUpload);
 		//Add Notification only if valid folderId is used
 		if (folderId != -1) {
 			return addNotification(folderId, isUpload);
@@ -114,15 +114,15 @@ public class AddNotification {
 	 * @param isUpload if request is upload or download
 	 * @return NotificationResponse the response
 	 */
-	private static NotificationResponse addNotification(int folderId, boolean isUpload) {
-		Body4 body4 = constructBody(folderId, isUpload);
+	private static NotificationResponse addNotification(long folderId, boolean isUpload) {
+		AddNotificationRequestBody requestBody = constructBody(folderId, isUpload);
 		try {
 			/*
 			 * The addNotification method of the NotificationsApi returns a NotificationResponse object
 			 * See <a href="https://www.exavault.com/developer/api-docs/v2#operation/addNotification">addNotification</a>
 			 *  for the details of the response object
 			 */
-			return notificationsApi.addNotification(credential.getEvApiKey(), credential.getEvAccessToken(), body4);
+			return notificationsApi.addNotification(credential.getEvApiKey(), credential.getEvAccessToken(), requestBody);
 		} catch (ApiException e) {
 			System.err.println("Exception when calling NotificationsApi#addNotification" + getErrorStack(e));
 			return null;
@@ -145,25 +145,25 @@ public class AddNotification {
 	 *
 	 * @param folderId newly created folder id
 	 * @param isUpload if upload or download
-	 * @return constructed body4 object
+	 * @return constructed requestBody object
 	 */
-	private static Body4 constructBody(int folderId, boolean isUpload) {
-		Body4 body4 = new Body4();
+	private static AddNotificationRequestBody constructBody(long folderId, boolean isUpload) {
+		AddNotificationRequestBody requestBody = new AddNotificationRequestBody();
 		List<String> usernames = Collections.singletonList(USER_ALL);
 		List<String> recipients = Arrays.asList(TEST_EMAIL1, TEST_EMAIL2, TEST_EMAIL3);
-		body4.setResource("id:" + folderId);
-		body4.setUsernames(usernames);
-		body4.setRecipients(recipients);
+		requestBody.setResource("id:" + folderId);
+		requestBody.setUsernames(usernames);
+		requestBody.setRecipients(recipients);
 		if (isUpload) {
-			body4.setAction(Body4.ActionEnum.UPLOAD);
-			body4.setMessage(UPLOADED);
+			requestBody.setAction(AddNotificationRequestBody.ActionEnum.UPLOAD);
+			requestBody.setMessage(UPLOADED);
 		} else {
-			body4.setAction(Body4.ActionEnum.DOWNLOAD);
-			body4.setMessage(DOWNLOADED);
+			requestBody.setAction(AddNotificationRequestBody.ActionEnum.DOWNLOAD);
+			requestBody.setMessage(DOWNLOADED);
 		}
-		body4.setType(Body4.TypeEnum.FOLDER);
-		body4.setSendEmail(true);
-		return body4;
+		requestBody.setType(AddNotificationRequestBody.TypeEnum.FOLDER);
+		requestBody.setSendEmail(true);
+		return requestBody;
 	}
 
 	/**
@@ -171,18 +171,20 @@ public class AddNotification {
 	 * New Folder will have random name on each run of this program
 	 * <p>
 	 * See <a href="https://www.exavault.com/developer/api-docs/v2#operation/addFolder">addFolder</a> for the request body schema
+	 *
+	 * @return
 	 */
-	private static int createAndGetFolderId(int randomNumber, boolean isUpload) {
-		Body8 body = new Body8();
+	private static long createAndGetFolderId(int randomNumber, boolean isUpload) {
+		AddFolderRequestBody requestBody = new AddFolderRequestBody();
 		if (isUpload) {
-			body.setPath(String.format(BASE_FOLDER_NAME_UPLOAD, randomNumber));
+			requestBody.setPath(String.format(BASE_FOLDER_NAME_UPLOAD, randomNumber));
 		} else {
-			body.setPath(String.format(BASE_FOLDER_NAME_DOWNLOAD, randomNumber));
+			requestBody.setPath(String.format(BASE_FOLDER_NAME_DOWNLOAD, randomNumber));
 		}
-		int folderId = 0;
+		long folderId = 0;
 		try {
 			//The addFolder method of the ResourcesApi returns a ResourceResponse object
-			ResourceResponse result = resourcesApi.addFolder(credential.getEvApiKey(), credential.getEvAccessToken(), body);
+			ResourceResponse result = resourcesApi.addFolder(credential.getEvApiKey(), credential.getEvAccessToken(), requestBody);
 			// Get new folder id so we can than set notification on it
 			Resource data = result.getData();
 			if (data != null) {

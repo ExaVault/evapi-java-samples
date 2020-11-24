@@ -3,9 +3,10 @@ package com.exavault.java.samples;
 import com.exavault.client.ApiClient;
 import com.exavault.client.ApiException;
 import com.exavault.client.api.UsersApi;
-import com.exavault.client.model.Body5;
+import com.exavault.client.model.AddUserRequestBody;
 import com.exavault.client.model.User;
 import com.exavault.client.model.UserResponse;
+import com.exavault.client.model.UsersPermissions;
 
 import java.util.Random;
 import java.util.UUID;
@@ -53,23 +54,28 @@ public class CreateUser {
 		UsersApi usersApi = new UsersApi(apiClient);
 		/*
 		 * See <a href="https://www.exavault.com/developer/api-docs/V2#operatiom/addUser">addUser</a>
-		 * for the request body schema
+		 * for the request requestBody schema
 		 */
-		Body5 body = new Body5();
-		body.setEmail("testuser@example.com");
-		body.setPassword("testpaSsword8");
-		body.setHomeResource("/");
-		body.setPermissions("upload,download,modify,delete");
-		body.setRole(Body5.RoleEnum.USER);
-		body.setTimeZone("America/Los_Angeles");
-		body.setUsername("testuser-" + uuid.toString().replaceAll("-", "") + "-" + Math.abs(rand.nextInt()));
-		body.setWelcomeEmail(true);
+		AddUserRequestBody requestBody = new AddUserRequestBody();
+		requestBody.setEmail("testuser@example.com");
+		requestBody.setPassword("testpaSsword8");
+		requestBody.setHomeResource("/");
+		UsersPermissions permissions = new UsersPermissions()
+			                               .delete(true)
+			                               .download(true)
+			                               .upload(true)
+			                               .modify(true);
+		requestBody.setPermissions(permissions);
+		requestBody.setRole(AddUserRequestBody.RoleEnum.USER);
+		requestBody.setTimeZone("America/Los_Angeles");
+		requestBody.setUsername("testuser-" + uuid.toString().replaceAll("-", "") + "-" + Math.abs(rand.nextInt()));
+		requestBody.setWelcomeEmail(true);
 		try {
 			/*
 			 * See <a href="https://www.exavault.com/developer/api-docs/V2#operatiom/addUser">addUser</a>
-			 * for the response body schema
+			 * for the response requestBody schema
 			 */
-			UserResponse result = usersApi.addUser(credential.getEvApiKey(), credential.getEvAccessToken(), body);
+			UserResponse result = usersApi.addUser(credential.getEvApiKey(), credential.getEvAccessToken(), requestBody);
 			//print out the response
 			if (result != null) {
 				if (result.getResponseStatus() == RESPONSE_CODE_201) {
