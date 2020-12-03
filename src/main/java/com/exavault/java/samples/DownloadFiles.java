@@ -93,10 +93,7 @@ public class DownloadFiles {
 		try {
 			//If zipping multiple upload, the name of the zip file to create and download
 			String downloadName;
-			//Used when downloading multiple upload so url will be pulled till zip file is created
-			final boolean polling = false;
-			//Reference to the previously created zip for polling operation
-			String pollingZipName = null;
+
 			int random = Math.abs(result.nextInt());
 			if (allResourceIds.size() > 1) {
 				downloadName = PREFIX + random + ZIP;
@@ -104,7 +101,7 @@ public class DownloadFiles {
 				downloadName = PREFIX + random + CSV; //only one file
 			}
 			File fileContent = resourcesApi.download(credential.getEvApiKey(), credential.getEvAccessToken(),
-				allResourceIds, downloadName, polling, pollingZipName);
+				allResourceIds, downloadName);
 			saveToLocalFile(fileContent, downloadName);
 		} catch (ApiException | IOException e) {
 			System.err.println("Exception when calling ResourcesApi#download" + getErrorStack(e));
