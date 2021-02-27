@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.exavault.java.samples.Utils.getErrorStack;
+import static com.exavault.java.samples.Utils.customErrorResponse;
 
 /**
  * To use this sample, add your credentials to a file named {@code credentials.properties} which is located in {@code resources} folder at root level of your project.
@@ -103,8 +103,10 @@ public class DownloadFiles {
 			File fileContent = resourcesApi.download(credential.getEvApiKey(), credential.getEvAccessToken(),
 				allResourceIds, downloadName);
 			saveToLocalFile(fileContent, downloadName);
-		} catch (ApiException | IOException e) {
-			System.err.println("Exception when calling ResourcesApi#download" + getErrorStack(e));
+		} catch (ApiException e) {
+			System.err.println("Exception when calling ResourcesApi#download => \n" + Utils.customErrorResponse(e));
+		}catch (IOException e){
+			System.err.println("Exception when calling ResourcesApi#download => \n" + customErrorResponse(e));
 		}
 	}
 
@@ -161,7 +163,7 @@ public class DownloadFiles {
 				System.out.println(item.getAttributes().getPath());
 			}
 		} catch (ApiException e) {
-			System.err.println("Exception when calling ResourcesApi#listResources" + getErrorStack(e));
+			System.err.println("Exception when calling ResourcesApi#listResources => \n" + Utils.customErrorResponse(e));
 		}
 		return resources;
 	}

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.exavault.java.samples.Utils.getErrorStack;
+import static com.exavault.java.samples.Utils.customErrorResponse;
 
 /**
  * To use this sample, add your credentials to a file named {@code credentials.properties} which is located in {@code resources} folder at root level of your project.
@@ -94,7 +94,7 @@ public class GetActivity {
 				startDate, endDate, ipAddress, userName, path, type, offset, limit, sort);
 			getAndPrintFailedLogins(result);
 		} catch (ApiException e) {
-			System.err.println("Exception when calling ActivityApi#getSessionLogs" + getErrorStack(e));
+			System.err.println("Exception when calling ActivityApi#getSessionLogs => \n" + Utils.customErrorResponse(e));
 		}
 	}
 
