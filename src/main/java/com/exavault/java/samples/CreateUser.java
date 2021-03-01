@@ -86,6 +86,7 @@ public class CreateUser {
 				}
 			}
 		} catch (ApiException e) {
+			//Customizing the error response from APIException
 			System.err.println("Exception when calling UsersApi#addUser => \n" + Utils.customErrorResponse(e));
 		}
 	}
