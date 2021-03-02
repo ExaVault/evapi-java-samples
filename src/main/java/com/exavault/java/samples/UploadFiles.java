@@ -10,7 +10,7 @@ import java.io.File;
 import static com.exavault.java.samples.AddNotification.RESPONSE_CODE_201;
 import static com.exavault.java.samples.Utils.BASE_PATH;
 import static com.exavault.java.samples.Utils.getAllLocalFiles;
-import static com.exavault.java.samples.Utils.getErrorStack;
+import static com.exavault.java.samples.Utils.customErrorResponse;
 import static com.exavault.java.samples.Utils.uploadFile;
 
 /**
@@ -64,7 +64,8 @@ public class UploadFiles {
 				}
 			}
 		} catch (ApiException e) {
-			System.err.println("Exception when calling ResourcesApi#uploadFile" + getErrorStack(e));
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
+			System.err.println("Exception when calling ResourcesApi#uploadFile => \n" + Utils.customErrorResponse(e));
 		}
 	}
 

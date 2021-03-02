@@ -5,6 +5,7 @@ import com.exavault.client.api.ResourcesApi;
 import com.exavault.client.model.ResourceResponse;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
@@ -43,7 +44,7 @@ public final class Utils {
 	 * @throws ApiException request could not be completed normally
 	 */
 	public static ResourceResponse uploadFile(
-		ResourcesApi resourcesApi, Credential credential, File file) throws ApiException {
+			ResourcesApi resourcesApi, Credential credential, File file) throws ApiException {
 		//Destination path for the file being uploaded, including the file name.
 		String path = BASE_PATH + "/" + file.getName();
 		//File size, in bits, of the file being uploaded.
@@ -63,11 +64,39 @@ public final class Utils {
 		 */
 
 		return resourcesApi.uploadFile(credential.getEvApiKey(), credential.getEvAccessToken(),
-			path, fileSize, file, offsetBytes, resume, allowOverwrite);
+				path, fileSize, file, offsetBytes, resume, allowOverwrite);
+	}
+
+	// Utility method to extract error details from an ApiException object
+	public static String customErrorResponse(ApiException e) {
+		try {
+			final String responseBody = e.getResponseBody();
+			int status = -1;
+			String errorCode = "";
+			String errorDetails = "";
+			final int statusIndex = responseBody.indexOf("responseStatus\":");
+			final int statusEndIndex = responseBody.indexOf(",\"errors");
+			final int codeStartIndex = responseBody.indexOf("\"code\":\"");
+			final int codeEndIndex = responseBody.indexOf("\",\"detail\":\"");
+			final int detailEndIndex = responseBody.indexOf("\"}]}");
+			if (statusIndex != -1 && statusEndIndex != -1) {
+				status = Integer.parseInt(responseBody.substring(statusIndex + 16, statusEndIndex));
+			}
+			if (codeStartIndex != -1 && codeEndIndex != -1) {
+				errorCode = responseBody.substring(codeStartIndex + 8, codeEndIndex);
+			}
+			if (codeEndIndex != -1 && detailEndIndex != -1) {
+				errorDetails = responseBody.substring(codeEndIndex + 12, detailEndIndex);
+			}
+			ErrorResponse errorResponse = new ErrorResponse(status, errorCode, errorDetails);
+			return errorResponse.toString();
+		} catch (Exception e1) {
+			return e.getResponseBody();
+		}
 	}
 
 	//utility method to convert error stack trace to string
-	public static String getErrorStack(Exception e) {
+	public static String customErrorResponse(IOException e) {
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		e.printStackTrace(pw);

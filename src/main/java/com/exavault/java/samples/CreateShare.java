@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.exavault.java.samples.AddNotification.RESPONSE_CODE_201;
-import static com.exavault.java.samples.Utils.getErrorStack;
+import static com.exavault.java.samples.Utils.customErrorResponse;
 
 
 /**
@@ -100,7 +100,8 @@ public class CreateShare {
 				folderId = -1; //set to invalid id to check further
 			}
 		} catch (ApiException e) {
-			System.err.println("Exception when calling ResourcesApi#addFolder" + getErrorStack(e));
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
+			System.err.println("Exception when calling ResourcesApi#addFolder => \n" + Utils.customErrorResponse(e));
 		}
 		return folderId;
 	}
@@ -123,8 +124,8 @@ public class CreateShare {
 			//print out the response
 			printResponse(result);
 		} catch (ApiException e) {
-			System.err.println("Exception when calling SharesApi#addShare");
-			e.printStackTrace();
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
+			System.err.println("Exception when calling SharesApi#addShare => \n" + Utils.customErrorResponse(e));
 		}
 	}
 

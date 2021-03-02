@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static com.exavault.java.samples.Utils.getErrorStack;
+import static com.exavault.java.samples.Utils.customErrorResponse;
 
 
 /**
@@ -124,7 +124,8 @@ public class AddNotification {
 			 */
 			return notificationsApi.addNotification(credential.getEvApiKey(), credential.getEvAccessToken(), requestBody);
 		} catch (ApiException e) {
-			System.err.println("Exception when calling NotificationsApi#addNotification" + getErrorStack(e));
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
+			System.err.println("Exception when calling NotificationsApi#addNotification => \n" + Utils.customErrorResponse(e));
 			return null;
 		}
 	}
@@ -193,7 +194,8 @@ public class AddNotification {
 				folderId = -1; //set to invalid id to check further
 			}
 		} catch (ApiException e) {
-			System.err.println("Exception when calling ResourcesApi#addFolder" + getErrorStack(e));
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
+			System.err.println("Exception when calling ResourcesApi#addFolder => \n" + Utils.customErrorResponse(e));
 		}
 		return folderId;
 	}
