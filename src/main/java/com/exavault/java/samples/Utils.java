@@ -67,6 +67,7 @@ public final class Utils {
 				path, fileSize, file, offsetBytes, resume, allowOverwrite);
 	}
 
+	// Utility method to extract error details from an ApiException object
 	public static String customErrorResponse(ApiException e) {
 		try {
 			final String responseBody = e.getResponseBody();

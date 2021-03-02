@@ -64,6 +64,7 @@ public class UploadFiles {
 				}
 			}
 		} catch (ApiException e) {
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
 			System.err.println("Exception when calling ResourcesApi#uploadFile => \n" + Utils.customErrorResponse(e));
 		}
 	}

@@ -105,8 +105,10 @@ public class GetUsers {
 			// print our list of all users in the account
 			exportToCsv(users);
 		} catch (ApiException e) {
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
 			System.err.println("Exception when calling UsersApi#listUsers => \n" + Utils.customErrorResponse(e));
 		} catch (IOException e) {
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the IOException
 			System.err.println("Exception when writing data to csv file => \n" + customErrorResponse(e));
 		}
 	}

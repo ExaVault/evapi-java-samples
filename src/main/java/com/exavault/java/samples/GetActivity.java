@@ -94,6 +94,7 @@ public class GetActivity {
 				startDate, endDate, ipAddress, userName, path, type, offset, limit, sort);
 			getAndPrintFailedLogins(result);
 		} catch (ApiException e) {
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
 			System.err.println("Exception when calling ActivityApi#getSessionLogs => \n" + Utils.customErrorResponse(e));
 		}
 	}

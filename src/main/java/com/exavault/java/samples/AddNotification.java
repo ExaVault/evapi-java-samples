@@ -124,6 +124,7 @@ public class AddNotification {
 			 */
 			return notificationsApi.addNotification(credential.getEvApiKey(), credential.getEvAccessToken(), requestBody);
 		} catch (ApiException e) {
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
 			System.err.println("Exception when calling NotificationsApi#addNotification => \n" + Utils.customErrorResponse(e));
 			return null;
 		}
@@ -193,6 +194,7 @@ public class AddNotification {
 				folderId = -1; //set to invalid id to check further
 			}
 		} catch (ApiException e) {
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
 			System.err.println("Exception when calling ResourcesApi#addFolder => \n" + Utils.customErrorResponse(e));
 		}
 		return folderId;

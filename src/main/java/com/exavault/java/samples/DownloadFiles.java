@@ -104,8 +104,10 @@ public class DownloadFiles {
 				allResourceIds, downloadName);
 			saveToLocalFile(fileContent, downloadName);
 		} catch (ApiException e) {
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
 			System.err.println("Exception when calling ResourcesApi#download => \n" + Utils.customErrorResponse(e));
 		}catch (IOException e){
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the IOException
 			System.err.println("Exception when calling ResourcesApi#download => \n" + customErrorResponse(e));
 		}
 	}

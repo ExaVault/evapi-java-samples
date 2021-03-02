@@ -78,6 +78,7 @@ public class CompressFiles {
 				}
 			}
 		} catch (ApiException e) {
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
 			System.err.println("Exception when calling ResourcesApi#uploadFile => \n" + Utils.customErrorResponse(e));
 		}
 	}
@@ -106,6 +107,7 @@ public class CompressFiles {
 			ResourceResponse result = resourcesApi.compressFiles(credential.getEvApiKey(), credential.getEvAccessToken(), requestBody);
 			validateAndPrint(result);
 		} catch (ApiException e) {
+			// In order to capture the detailed error message from the ExaVault API, we are using a custom ErrorResponse class to parse the ApiException
 			System.err.println("Exception when calling ResourcesApi#compressFiles => \n" + Utils.customErrorResponse(e));
 		}
 	}
